@@ -20,6 +20,9 @@ import { RouterModule } from '@angular/router';
 import { AppRoutesModule } from './modules/app.routes';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HeaderDirective } from './directives/header.directive';
+import { MyIfDirective } from './directives/my-if.directive';
+
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,15 +44,16 @@ import { HeaderDirective } from './directives/header.directive';
     ProfitPipe,
 
     // Directives
-    HeaderDirective
+    HeaderDirective,
+    MyIfDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppRoutesModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
