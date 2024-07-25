@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,55 +7,37 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor() {}
 
-  fanFavouriteMovies: any[] = [
-    {
-      imageUrl: '../../../assets/images/shawshank1.jpg',
-      title: 'Movie #1 Title',
-      actors: 'Movie #1 Actors',
-      year: '2023',
-      rate: '9.5/10',
-      rank: '1'
-    },
-    {
-      imageUrl: '../../../assets/images/shawshank1.jpg',
-      title: 'Movie #2 Title',
-      actors: 'Movie #2 Actors',
-      year: '2023',
-      rate: '9.5/10',
-      rank: '1'
-    },
-    {
-      imageUrl: '../../../assets/images/shawshank1.jpg',
-      title: 'Movie #3 Title',
-      actors: 'Movie #3 Actors',
-      year: '2023',
-      rate: '9.5/10',
-      rank: '1'
-    },
-  ]
+  // Inject http client
+  constructor(private httpClient: HttpClient) {}
 
-  topMovies: any[] = [
-    {
-      imageUrl: '../../../assets/images/shawshank1.jpg',
-      title: 'Movie #1 Title',
-      actors: 'Movie #1 Actors',
-      year: '2023',
-      rate: '9.5/10',
-      rank: '1'
-    },
-    {
-      imageUrl: '../../../assets/images/shawshank1.jpg',
-      title: 'Movie #2 Title',
-      actors: 'Movie #2 Actors',
-      year: '2023',
-      rate: '9.5/10',
-      rank: '1'
-    },
-  ]
+  isActive = false;
 
-  isVisible = true;
+  fanFavouriteMovies: any[] = []
+
+  topMovies: any[] = []
+
+  ngOnInit(): void {
+    this.getfanFavouriteMovies();
+    this.getTopMovies();
+  }
+
+  getfanFavouriteMovies(){
+    this.httpClient.get<any[]>('/assets/data/fanFavouriteMovies.json')
+    .subscribe((data: any[]) => {
+      console.log("Fan favourites ", data);
+      this.fanFavouriteMovies = data
+    });
+  }
+
+  getTopMovies(){
+    this.httpClient.get<any[]>('/assets/data/topMovies.json')
+    .subscribe((data: any[]) => {
+      console.log("Top Movies ",  data);
+      this.topMovies = data;
+    });
+  }
+
   // currentStyles: Record<string, string> = {}
 
   // isSuccess = false
