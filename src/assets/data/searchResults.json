@@ -1,0 +1,20 @@
+[
+    {
+        "imageUrl": "../../../assets/images/shawshank4.jpg",
+        "title": "Movie #1 Title",
+        "description": "This is a short description of Movie #1 Title",
+        "detailsLink": "/details"
+    },
+    {
+        "imageUrl": "../../../assets/images/shawshank4.jpg",
+        "title": "Movie #2 Title",
+        "description": "This is a short description of Movie #2 Title",
+        "detailsLink": "/details"
+    },
+    {
+        "imageUrl": "../../../assets/images/shawshank4.jpg",
+        "title": "Movie #3 Title",
+        "description": "This is a short description of Movie #3 Title",
+        "detailsLink": "/details"
+    }
+]
