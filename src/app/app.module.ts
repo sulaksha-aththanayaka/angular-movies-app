@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,9 @@ import { HeaderDirective } from './directives/header.directive';
 import { MyIfDirective } from './directives/my-if.directive';
 
 import { provideHttpClient } from '@angular/common/http';
+import { MoviesService } from './services/movies.service';
+import { GlobalErrorHandler } from './services/global-error-handler.service';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { provideHttpClient } from '@angular/common/http';
     ModalComponent,
     DetailsActorsComponent,
     NotFoundComponent,
+    FeedbackComponent,
 
     // Pipes
     ProfitPipe,
@@ -53,7 +57,9 @@ import { provideHttpClient } from '@angular/common/http';
     AppRoutesModule,
     FormsModule,
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(), MoviesService, 
+    { provide: ErrorHandler, useClass: GlobalErrorHandler}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

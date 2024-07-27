@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MoviesService } from '../../services/movies.service';
 
 @Component({
   selector: 'app-search',
@@ -12,8 +13,8 @@ export class SearchComponent implements OnInit{
   movieTitle = ""
   searchResults:any[] = []
 
-  constructor(private _activatedRoute: ActivatedRoute, private httpClient: HttpClient) {
-    this._activatedRoute.params.subscribe((p) => {
+  constructor(private activatedRoute: ActivatedRoute, private movieService: MoviesService) {
+    this.activatedRoute.params.subscribe((p) => {
       this.movieTitle = p['movieTitle'];
     })
   }
@@ -23,7 +24,7 @@ export class SearchComponent implements OnInit{
   }
 
   loadSearchResults() {
-    this.httpClient.get<any[]>('assets/data/searchResults.json')
+    this.movieService.getSearchResults()
     .subscribe((data:any) => {
       this.searchResults = data;
     })
