@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterContentInit, AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MoviesService } from '../../services/movies.service';
 
 @Component({
   selector: 'app-details',
@@ -12,8 +13,8 @@ export class DetailsComponent implements OnInit{
 
   movieId = ''
 
-  constructor(private _activatedRoute: ActivatedRoute, private httpClient: HttpClient) {
-    this._activatedRoute.params.subscribe((p) => {
+  constructor(private activatedRoute: ActivatedRoute, private movieService: MoviesService) {
+    this.activatedRoute.params.subscribe((p) => {
       this.movieId = p['id'];
     })
   }
@@ -27,7 +28,7 @@ export class DetailsComponent implements OnInit{
   }
 
   loadMovieSummary() {
-    this.httpClient.get<any[]>('assets/data/movieSummary.json')
+    this.movieService.getMovieSummary()
     .subscribe((data:any) => {
       this.stars = data.stars;
       this.directors = data.directors;

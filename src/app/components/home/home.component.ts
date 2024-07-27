@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { catchError, of } from 'rxjs';
+import { MoviesService } from '../../services/movies.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { catchError, of } from 'rxjs';
 export class HomeComponent {
 
   // Inject http client
-  constructor(private httpClient: HttpClient) {}
+  constructor(private movieService: MoviesService) {}
 
   isActive = false;
 
@@ -24,7 +25,7 @@ export class HomeComponent {
   }
 
   getfanFavouriteMovies(){
-    this.httpClient.get<any[]>('/assets/data/fanFavouriteMovies.json')
+    this.movieService.getFanFavouriteMovies()
     .subscribe({
       next: (data: any[]) => {
         console.log("Fan favourites ", data);
@@ -57,7 +58,7 @@ export class HomeComponent {
   // }
 
   getTopMovies(){
-    this.httpClient.get<any[]>('/assets/data/topMovies.json')
+    this.movieService.getTopMovies()
     .subscribe({
       next: (data: any[]) => {
         console.log("Top Movies ",  data);
