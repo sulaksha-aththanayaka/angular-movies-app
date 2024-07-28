@@ -1,93 +1,127 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <form #feedbackForm="ngForm" (ngSubmit)="submitFeedback()">
-        <legend>Let us know what you think</legend>
-        <hr />
+      <!-- <form #feedbackForm="ngForm" (ngSubmit)="submitFeedback()"> -->
+        <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+          <legend>Let us know what you think</legend>
+          <hr />
+  
+          <div class="mb-3">
+            <label for="emailAddress" class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="emailAddress"
+              name="emailAddress"
+              placeholder="Your email address"
+       
+  
+              required
+              email
+  
+              formControlName="emailAddress"
+            />
+            <!-- <div class="text-danger" *ngIf="emailInput.invalid && (emailInput.dirty || feedbackForm.submitted)">
+  
+              <div *ngIf="emailInput.hasError('required')">Email is required</div>
+              <div *ngIf="emailInput.hasError('email')">Invalid email format</div>
+  
+            </div> -->
+          </div>
+  
+          <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phoneNumber"
+              name="phoneNumber"
+              placeholder="Your phone number"
+              formControlName="phoneNumber"
+  
+              pattern="[0-9]{4}-[0-9]{4}"
+  
+            />
+  
+            <!-- <div class="text-danger" *ngIf="phoneInput.invalid && (phoneInput.dirty || feedbackForm.submitted)">
+  
+              <div *ngIf="phoneInput.hasError('pattern')">Invalid phone number format</div>
+  
+            </div> -->
 
-        <div class="mb-3">
-          <label for="emailAddress" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="emailAddress"
-            name="emailAddress"
-            placeholder="Your email address"
-            [(ngModel)]="feedback.emailAddress"
+            <!-- <div class="text-danger" *ngIf="phoneInput.invalid && (phoneInput.dirty || feedbackForm.submitted)">
+  
+              <div *ngIf="phoneInput.hasError('pattern')">Invalid phone number format</div>
+  
+            </div> -->
+          </div>
+  
+          <div class="mb-3">
+            <label for="rateExperience" class="form-label">Rate experience</label>
+            <input
+              type="range"
+              class="form-range"
+              min="0"
+              max="10"
+              step="1"
+              id="rateExperience"
+              name="rate"
+             
+            />
+          </div>
+  
+          <!-- <div>
+              Your feedback: {{feedback.rate}}
+          </div> -->
+  
+          <div class="mb-3">
+            <label for="feedbackTitle" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="feedbackTitle"
+              name="feedbackTitle"
+              placeholder="Your feedback titile"
+              formControlName="feedbackTitle"
 
-            required
-            email
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="phoneNumber" class="form-label">Phone number</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phoneNumber"
-            name="phoneNumber"
-            placeholder="Your phone number"
-            [(ngModel)]="feedback.phoneNumber"
-
-            pattern="[0-9\-]"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="rateExperience" class="form-label">Rate experience</label>
-          <input
-            type="range"
-            class="form-range"
-            min="0"
-            max="10"
-            step="1"
-            id="rateExperience"
-            name="rateExperience"
-            [(ngModel)]="feedback.rate"
-          />
-        </div>
-
-        <div>
-            Your feedback: {{feedback.rate}}
-        </div>
-
-        <div class="mb-3">
-          <label for="feedbackTitle" class="form-label">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="feedbackTitle"
-            name="feedbackTitle"
-            placeholder="Your feedback titile"
-            [(ngModel)]="feedback.feedbackTitle"
-
-            required
-            pattern="[A-Za-z-9\s]"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="feedback" class="form-label">Feedback</label>
-          <input
-            type="text"
-            class="form-control"
-            id="feedback"
-            name="feedback"
-            placeholder="Your feedback"
-            [(ngModel)]="feedback.feedback"
-
-            required
-            pattern="[A-Za-z-9\s]"
-          />
-        </div>
-
-        <div class="mb-3">
-          <button class="btn btn-primary" type="submit" [disabled]="!feedbackForm.valid">
-            <i class="bi bi-send"></i>Submit Feedback
-          </button>
-        </div>
-      </form>
+            />
+  
+            <!-- <div class="text-danger" *ngIf="feedbackTitleInput.invalid && (feedbackTitleInput.dirty || feedbackForm.submitted)">
+  
+              <div *ngIf="feedbackTitleInput.hasError('pattern')">Invalid titile format</div>
+              <div *ngIf="feedbackTitleInput.hasError('required')">Feedback title required</div>
+  
+            </div> -->
+          </div>
+  
+          <div class="mb-3">
+            <label for="feedback" class="form-label">Feedback</label>
+            <input
+              type="text"
+              class="form-control"
+              id="feedback"
+              name="feedback"
+              placeholder="Your feedback"
+  
+              feedbackTitle="feedback"
+            />
+  
+            
+            <!-- <div class="text-danger" *ngIf="feedbackInput.invalid && (feedbackInput.dirty || feedbackForm.submitted)">
+  
+              <div *ngIf="feedbackInput.hasError('pattern')">Invalid input format</div>
+              <div *ngIf="feedbackInput.hasError('required')">Feedback Input required</div>
+  
+            </div> -->
+          </div>
+  
+          <div class="mb-3">
+            <button class="btn btn-primary" type="submit" [disabled]="!feedbackForm.valid">
+              <i class="bi bi-send"></i>Submit Feedback
+            </button>
+          </div>
+        </form>
+      <!-- </form> -->
     </div>
   </div>
 </div>
